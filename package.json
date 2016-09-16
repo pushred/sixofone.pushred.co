@@ -1,0 +1,24 @@
+{
+  "name": "sixofone.pushred.co",
+  "author": "Eric Lanehart <eric@pushred.co> (http://pushred.co)",
+  "scripts": {
+    "dev": "gulp",
+    "lint": "semistandard",
+    "lint:staged": "semistandard $(git status --porcelain | grep -E '(M|A)?(\\s\\s|M|A).*.js$' | awk '{print $2}' | tr '\n' ' ')"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pushred/sixofone.pushred.co.git"
+  },
+  "engines": {
+    "node": ">=6.5.0",
+    "npm": ">=3.10.3"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.16.0",
+    "clean-urls": "^1.1.5",
+    "gulp": "^3.9.1",
+    "gulp-cli": "^1.2.2",
+    "semistandard": "^9.0.0"
+  }
+}
