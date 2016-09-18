@@ -1,0 +1,48 @@
+.header {
+  width: 100vw;
+  height: var(--header-size);
+  overflow: hidden;
+
+  &__nav {
+    position: absolute;
+    top: var(--margin-space);
+    right: var(--margin-space);
+    z-index: var(--header-nav-zindex);
+  }
+
+  &__nav .icon span {
+    @apply --image-replace;
+  }
+
+  &__logo,
+  &__nav_link {
+    cursor: pointer;
+    float: right;
+    margin-left: var(--gutter-space);
+  }
+
+  &__nav_link svg {
+    width: 2.2em;
+    height: 1.7em;
+    opacity: .5;
+  }
+
+  &__logo {
+    @apply --reset;
+  }
+
+  &__logo svg {
+    width: 13em;
+    height: 1.7em;
+    color: var(--white-color);
+  }
+
+  &__background {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: var(--header-size);
+    z-index: var(--background-zindex);
+  }
+}

@@ -1,0 +1,97 @@
+@import './fonts';
+@import './layout';
+@import './typography';
+
+@import '../components/header';
+@import '../components/post';
+
+:root {
+  /* spacing */
+
+  --margin-space:           7rem;
+  --gutter-space:           3.2rem;
+
+  /* font stacks */
+
+  --display-font:           'Copernicus', 'Georgia',  serif;
+  --text-font:              'Palatino',   'Georgia',  serif;
+  --allcaps-font:           'Futura Std', 'Segoe UI', sans-serif;
+
+  /* colors */
+
+  --black-color:            hsl(0,   0%,   0%);
+  --white-color:            hsl(0,   0%,   100%);
+
+  --10-gray-color:          hsl(0,   0%,   10%);
+  --20-gray-color:          hsl(0,   0%,   20%);
+  --40-gray-color:          hsl(0,   0%,   40%);
+  --50-gray-color:          hsl(0,   0%,   50%);
+  --70-gray-color:          hsl(0,   0%,   70%);
+  --80-gray-color:          hsl(0,   0%,   80%);
+  --90-gray-color:          hsl(0,   0%,   90%);
+  --98-gray-color:          hsl(0,   0%,   98%);
+
+  --link-text-color:			  hsl(28,  37%,  32%);
+	--pull-text-color:			  hsl(209, 13%,  59%);
+
+	--input-color:					  hsl(0,   0%,   100%);
+	--input-text-color: 		  hsl(0,   0%,   100%);
+	--input-border-color: 	  hsl(0,   0%,   100%);
+
+  --save-button-color: 		  hsl(87,  55%,  61%);
+  --modify-button-color:    hsl(54,  86%,  63%);
+  --destroy-button-color:   hsl(16,  76%,  58%);
+
+  --disabled-button-color:  var(--90-gray-color);
+
+  --background-color: 		  var(--white-color);
+  --knockout-color:         var(--white-color);
+  --rule-color: 					  var(--90-gray-color);
+
+  --text-color: 					  var(--20-gray-color);
+  --sidebar-text-color:     var(--70-gray-color);
+  --lead-text-color: 			  var(--50-gray-color);
+
+  /* sizes */
+
+  --header-size:            90vh;
+  --headline-padding:       0.13em;
+  --headline-crop-line:     1.47em;
+
+  /* layers */
+
+  --background-zindex:      1;
+  --header-zindex:          10;
+  --header-nav-zindex:      20;
+
+  /* property sets */
+
+  --allcaps-style: {
+		font-family: var(--allcaps-font);
+    font-style: normal;
+    letter-spacing: 0.066em;
+		text-transform: uppercase;
+  }
+
+  --image-replace: {
+    position: absolute;
+    top: -999em;
+    left: -999em;
+  }
+
+  --reset: {
+    margin: 0;
+    padding: 0;
+    font-size: 1em;
+  }
+
+  --reset-link: {
+    text-decoration: none;
+  }
+
+  --reset-list: {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+}

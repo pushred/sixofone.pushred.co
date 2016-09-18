@@ -26,19 +26,30 @@ If this runs into any trouble, please try npm’s recommendations on [fixing per
 - [env-cmd][env-cmd] sources environment variables crossplatform, from a JSON file
 - [gulp][gulp] runs tasks written in JavaScript
 - [gulp-s3-upload][gulp-s3-upload] uploads piped files to a S3 bucket/CloudFront
+- [postcss][postcss] bundles and transpiles future CSS
 - [sharp][sharp] resizes images using [libvips][libvips]
+- [svgstore][svgstore] bundles SVG files into a [sprite][sprites]
+- [svgmin][svgmin] optimizes bundled SVGs and normalizes color with [SVGO][svgo]
 
 Development
 -----------
 
 Here’s a diagram of how everything is organized:
 
+    ├── browser
+    │   └── :root variables, property sets, and global styles
+    ├── components
+    │   └── UI/design elements
+    ├── exercise
+    │   └── source files
     ├── gulpfile.js
-    │   └── development tasks
+    │   └── build/development task orchestration
     ├── node_modules
     │   └── third-party code installed from the npm registry and GitHub
-    └── server
-        └── Generated static pages and files, Browsersync root
+    ├── server
+    │   └── generated static pages and files, Browsersync/CloudFront root
+    └── gulpfile.js
+        └── development tasks
 
 ### Scripts
 
@@ -52,6 +63,13 @@ npm run dev
 - Watch files for changes and trigger gulp tasks as needed
 
 ```sh
+npm run lint
+npm run lint:staged
+```
+
+- Runs semistandard against all JS files or those staged for the next commit
+
+```sh
 npm run task <name>
 ```
 
@@ -59,6 +77,18 @@ npm run task <name>
 - Run a specified gulp task
 
 ### gulp Tasks
+
+#### `bundleCSS`
+
+- Transpiles CSS syntax (variables, property sets, nesting) into better supported CSS
+- Inlines @imports into a single file
+- Autoprefixes experimental properties for supported browsers
+
+#### `bundleSVG`
+
+- Consolidates SVG files from `/server/files/icons` into a single file as `<symbol>` elements
+- Minifies SVG markup
+- Normalizes fill colors as `currentColor` value for cascading color from context 
 
 #### `resizeImages`
 
@@ -82,3 +112,8 @@ npm run task <name>
 [gulp-s3-upload]: https://github.com/clineamb/gulp-s3-upload
 [libvips]: http://www.vips.ecs.soton.ac.uk/
 [sharp]: https://github.com/lovell/sharp
+[svgstore]: https://github.com/w0rm/gulp-svgstore
+[svgmin]: https://github.com/ben-eb/gulp-svgmin
+[svgo]: https://github.com/svg/svgo
+
+[sprites]: https://css-tricks.com/svg-symbol-good-choice-icons/

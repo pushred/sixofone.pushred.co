@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
+  <link rel="stylesheet" href="/files/bundle.css">
+
 	<meta name="og:type" content="article">
 	<meta name="twitter:card" content="summary">
 
@@ -19,6 +21,7 @@
   <meta property="og:description" content="Looking at it now, last December. We were built to fall apart. Then fall back together.">
 	<meta name="twitter:description" content="Looking at it now, last December. We were built to fall apart. Then fall back together.">
 
+	<link rel="icon" href="/files/icon.png">
 	<link rel="image_src" href="http://sixofone.pushred.co/files/images/Ji9qebSpSlSbnsWRZnDX__MG_9520-smallest.jpg">
   <meta property="og:image" content="http://sixofone.pushred.co/files/images/Ji9qebSpSlSbnsWRZnDX__MG_9520-smallest.jpg">
 	<meta name="twitter:image" content="http://sixofone.pushred.co/files/images/Ji9qebSpSlSbnsWRZnDX__MG_9520-smallest.jpg">
@@ -26,9 +29,21 @@
 </head>
 <body>
 	<header class="header">
-		<a class="header__nav_link" href="#menu" title="Menu">Jump to menu</a>
-		<h1 class="header__logo"><a class="header__logo_link" href="/">Six of One</a></h1>
-		<img
+    <nav class="header__nav">
+      <a class="header__nav_link icon" href="#menu" title="Menu">
+        <span>Jump to menu</span>
+        <svg><use xlink:href="/files/bundle.svg#menu"></use></svg>
+      </a>
+
+      <h1 class="header__logo">
+        <a class="header__logo_link icon" href="/" title="Home">
+          <span>SIX OF ONE</span>
+          <svg><use xlink:href="/files/bundle.svg#logo"></use></svg>
+        </a>
+      </h1>
+    </nav>
+
+    <img
 			class="header__background"
 			sizes="(max-width: 5184px) 100vw, 5184px"
 			alt="Photo of a river as seen from a vantage point in hills above"
@@ -43,10 +58,12 @@
 							http://sixofone.pushred.co/files/images/Ji9qebSpSlSbnsWRZnDX__MG_9520-smallest.jpg 640w">
 	</header>
 
-	<main class="main">
+	<main class="layout">
 		<article class="post">
 			<header class="post__header">
-				<h1 class="post___title">Are we out of the woods yet?</h1>
+        <div class="post__header_content">
+				  <h1 class="post__header_title"><span>Are we out of the woods yet?</span></h1>
+        </div>
 			</header>
 
 			<aside class="post__meta">
@@ -54,9 +71,9 @@
 				<time class="post__dateline" datetime="2015-08-06T00:00:00Z">August 6, 2015</time>
 
 				<nav class="post__tags">
-					<a class="post__tag" href="/posts/environment">#environment</a>
-					<a class="post__tag" href="/posts/swift">#swift</a>
-					<a class="post__tag" href="/posts/fungus">#fungus</a>
+					<a class="post__tag" href="/posts/environment">environment</a>
+					<a class="post__tag" href="/posts/swift">swift</a>
+					<a class="post__tag" href="/posts/fungus">fungus</a>
 				</nav>
 			</aside>
 

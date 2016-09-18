@@ -1,0 +1,11 @@
+@font-face {
+  font-family: 'Copernicus';
+  src: url('/files/fonts/copernicus-heavy.eot'); /* IE9 Compat Modes */
+  src: url('/files/fonts/copernicus-heavy.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/files/fonts/copernicus-heavy.woff') format('woff'), /* Modern Browsers */
+       url('/files/fonts/copernicus-heavy.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('/files/fonts/copernicus-heavy.svg#53d86533bbd20bc075f6ce29028572cc') format('svg'); /* Legacy iOS */
+
+  font-style: normal;
+  font-weight: 800;
+}

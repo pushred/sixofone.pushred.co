@@ -1,0 +1,131 @@
+.post {
+	&__byline a {
+		font-family: var(--display-font);
+	  font-weight: 800;
+		font-size: 1.4em;
+		text-transform: none;
+		text-rendering: optimizeLegibility;
+	}
+
+	&__lead_dateline {
+		@apply --allcaps-style;
+		padding-right: .5em;
+		color: var(--80-gray-color);
+		font-weight: 300;
+		font-size: .7em;
+		vertical-align: baseline;
+	}
+
+	&__tag {
+		display: block;
+		color: var(--70-gray-color);
+		line-height: 1.54;
+	}
+
+	&__tag:before {
+		content: '#';
+		color: var(--80-gray-color);
+	}
+}
+
+.post__header {
+  width: 100vw;
+  height: var(--header-size);
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: 0 var(--margin-space);
+
+	position: absolute;
+	top: 0;
+	left: 0;
+  right: 0;
+  z-index: var(--header-zindex);
+
+  mix-blend-mode: screen;
+
+  &_title,
+  &_title:after,
+  &_title:before {
+    background-color: var(--knockout-color);
+  }
+
+  /* https://css-tricks.com/multi-line-padded-text/#article-header-id-0 */
+
+  &_content {
+    position: absolute;
+    bottom: 1.3em;
+  }
+
+  &_content:before {
+    content: '';
+    position: relative;
+    top: 0;
+    left: calc(var(--headline-padding) * -1);
+    bottom: 0;
+    width: var(--headline-padding);
+    background-color: var(--knockout-color);
+  }
+
+  &_title {
+    @apply --reset;
+    display: inline;
+    position: relative;
+    width: 67%;
+    border-top: var(--headline-padding) solid var(--knockout-color);
+    padding-right: .25em;
+    font-family: var(--display-font);
+    font-size: 7.2em;
+    font-weight: 800;
+    letter-spacing: -0.029em;
+    line-height: 0.94;
+    text-rendering: optimizeLegibility;
+    white-space: pre-wrap;
+  }
+
+  &_title:after,
+  &_title:before {
+    content: '';
+    position: absolute;
+    top: var(--headline-crop-line);
+    bottom: calc(var(--headline-padding) * -1);
+    width: 100vw;
+  }
+
+  &_title:before { right: 0 }
+
+  &_title span {
+    position: relative;
+    left: 0;
+  }
+
+  &_title span:before {
+    content: '';
+    position: absolute;
+    mix-blend-mode: overlay;
+    top: calc(var(--headline-padding) * -1);
+    left: calc(var(--headline-padding) * -2);
+    bottom: 0;
+    width: 2em;
+    background: var(--knockout-color);
+  }
+}
+
+.post__meta {
+	& nav,
+	& p,
+	& time {
+		@apply --allcaps-style;
+		color: var(--sidebar-text-color);
+		font-size: 1.1em;
+	}
+
+	& > * {
+		display: block;
+		width: 18.2em;
+		margin-top: 2.5em;
+		border-top: 1px solid var(--rule-color);
+		padding-top: .7em;
+	}
+
+	& > *:first-child { margin-top: 0 }
+}
