@@ -22,6 +22,8 @@ If this runs into any trouble, please try npm’s recommendations on [fixing per
 
 ### Development
 
+- [babel][babel] transpiles future JS
+- [Browserify][bs] bundles JavaScript using node's CommonJS module system 
 - [Browsersync][bs] provides a local server with live reload across devices
 - [env-cmd][env-cmd] sources environment variables crossplatform, from a JSON file
 - [gulp][gulp] runs tasks written in JavaScript
@@ -84,6 +86,11 @@ npm run task <name>
 - Inlines @imports into a single file
 - Autoprefixes experimental properties for supported browsers
 
+#### `bundleJS`
+
+- Transpiles ES2015 syntax for broader browser support with Babel
+- Resolves modules and bundles into a single file with Browserify
+
 #### `bundleSVG`
 
 - Consolidates SVG files from `/server/files/icons` into a single file as `<symbol>` elements
@@ -98,7 +105,6 @@ npm run task <name>
 - The file closest to 300k is suffixed as `-fallback` for usage with `src`
 - The smallest file is suffixed as `-smallest` for usage in preview thumbnails, etc.
 
-
 [semistandard]: https://github.com/Flet/semistandard
 [semistandard-badge]: https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg?style=flat
 
@@ -106,6 +112,8 @@ npm run task <name>
 [npm]: https://docs.npmjs.com/getting-started/installing-npm-packages-locally
 [npm-permissions]: https://docs.npmjs.com/getting-started/fixing-npm-permissions
 
+[babel]: https://babeljs.io/
+[browserify]: http://browserify.org/ 
 [bs]: https://www.browsersync.io/
 [env-cmd]: https://github.com/toddbluhm/env-cmd
 [gulp]: http://gulpjs.com/

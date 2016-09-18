@@ -1,3 +1,4 @@
+const browserify = require('browserify');
 const browserSync = require('browser-sync').create();
 const cleanUrls = require('clean-urls');
 const gulp = require('gulp');
@@ -6,6 +7,7 @@ const postcss = require('gulp-postcss');
 const rename = require('gulp-rename');
 const run = require('run-sequence');
 const s3 = require('gulp-s3-upload')();
+const source = require('vinyl-source-stream');
 const svgmin = require('gulp-svgmin');
 const svgstore = require('gulp-svgstore');
 const watch = require('gulp-watch');
@@ -23,13 +25,10 @@ gulp.task('default', () => {
     open: false
   });
 
-  watch(['server/*.html'], browserSync.reload);
-
-  watch(['browser/*.css', 'components/*.css'], () => {
-    run('bundleCSS', browserSync.reload);
-  });
-
-  watch(['server/icons/**/*.svg'], run('bundleSVG'));
+  watch(['server/*.html'], () => browserSync.reload);
+  watch(['{browser,components}/**/*.css'], () => run('bundleCSS', browserSync.reload));
+  watch(['{browser,components}/**/*.js'], () => run('bundleJS', browserSync.reload));
+  watch(['server/icons/**/*.svg'], () => run('bundleSVG'));
 });
 
 gulp.task('bundleCSS', () => {
@@ -43,6 +42,14 @@ gulp.task('bundleCSS', () => {
       require('autoprefixer')({ browsers: ['last 2 versions', 'ie 9']})
     ]))
     .pipe(rename('bundle.css'))
+    .pipe(gulp.dest('server/files'));
+});
+
+gulp.task('bundleJS', () => {
+  return browserify('browser/index.js')
+    .transform('babelify', { presets: ['es2015'] })
+    .bundle()
+    .pipe(source('bundle.js'))
     .pipe(gulp.dest('server/files'));
 });
 
