@@ -33,6 +33,7 @@
     "gulp-watch": "^4.3.9",
     "gulplog": "^1.0.0",
     "image-type": "^2.1.0",
+    "lost": "^7.1.0",
     "postcss-apply": "^0.4.0",
     "postcss-custom-media": "^5.0.1",
     "postcss-custom-properties": "^5.0.1",

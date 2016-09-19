@@ -1,6 +1,7 @@
 .form {
   @apply --reset;
 
+  float: left;
   position: relative;
   background-color: var(--background-color);
   padding: 2rem 2rem 0 2rem;

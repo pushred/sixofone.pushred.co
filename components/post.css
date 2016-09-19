@@ -29,15 +29,13 @@
 }
 
 .post__header {
-  width: 100vw;
   height: var(--header-size);
   box-sizing: border-box;
-  padding: 0 var(--margin-space);
 
 	position: absolute;
 	top: 0;
-	left: 0;
-  right: 0;
+	left: var(--margin-space);
+  right: var(--margin-space);
   z-index: var(--header-zindex);
 
   &_title,
@@ -49,6 +47,8 @@
   /* https://css-tricks.com/multi-line-padded-text/#article-header-id-0 */
 
   &_content {
+    lost-column: 5/8;
+    lost-offset: -1/8;
     position: absolute;
     bottom: 1.3em;
     mix-blend-mode: screen;
@@ -57,6 +57,10 @@
   &_content--modify {
     bottom: 0;
     mix-blend-mode: normal;
+  }
+
+  &_content .form {
+    margin-left: calc(var(--form-padding) * -1);
   }
 
   &_content:before {
@@ -108,7 +112,15 @@
   }
 }
 
+.post__meta,
+.post__body {
+  & > *:first-child { margin-top: 0 }
+}
+
 .post__meta {
+  lost-column: 2/8;
+  lost-offset: -1/8;
+
 	& nav,
 	& p,
 	& time {
@@ -124,6 +136,9 @@
 		border-top: 1px solid var(--rule-color);
 		padding-top: .7em;
 	}
+}
 
-	& > *:first-child { margin-top: 0 }
+.post__body {
+  lost-column: 5/8;
+  max-width: 60.6em;
 }

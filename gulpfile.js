@@ -39,6 +39,7 @@ gulp.task('bundleCSS', () => {
       require('postcss-custom-properties'),
       require('postcss-apply'),
       require('postcss-nesting'),
+      require('lost'),
       require('autoprefixer')({ browsers: ['last 2 versions', 'ie 9']})
     ]))
     .pipe(rename('bundle.css'))
