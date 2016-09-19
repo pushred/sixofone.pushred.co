@@ -1,41 +1,41 @@
 .post {
-	&__byline a {
-		font-family: var(--display-font);
-	  font-weight: 800;
-		font-size: 1.4em;
-		text-transform: none;
-		text-rendering: optimizeLegibility;
-	}
+  &__byline a {
+    font-family: var(--display-font);
+    font-weight: 800;
+    font-size: 1.4em;
+    text-transform: none;
+    text-rendering: optimizeLegibility;
+  }
 
-	&__lead_dateline {
-		@apply --allcaps-style;
-		padding-right: .5em;
-		color: var(--80-gray-color);
-		font-weight: 300;
-		font-size: .7em;
-		vertical-align: baseline;
-	}
+  &__lead_dateline {
+    @apply --allcaps-style;
+    padding-right: .5em;
+    color: var(--80-gray-color);
+    font-weight: 300;
+    font-size: .7em;
+    vertical-align: baseline;
+  }
 
-	&__tag {
-		display: block;
-		color: var(--70-gray-color);
-		line-height: 1.54;
-	}
+  &__tag {
+    display: block;
+    color: var(--70-gray-color);
+    line-height: 1.54;
+  }
 
-	&__tag:before {
-		content: '#';
-		color: var(--80-gray-color);
-	}
+  &__tag:before {
+    content: '#';
+    color: var(--80-gray-color);
+  }
 }
 
 .post__header {
   height: var(--header-size);
   box-sizing: border-box;
 
-	position: absolute;
-	top: 0;
+  position: absolute;
+  top: 0;
   right: 0;
-	left: 0;
+  left: 0;
   z-index: var(--header-zindex);
 
   &_title,
@@ -109,21 +109,21 @@
 }
 
 .post__meta {
-	& nav,
-	& p,
-	& time {
-		@apply --allcaps-style;
-		color: var(--sidebar-text-color);
-		font-size: 1.1em;
-	}
+  & nav,
+  & p,
+  & time {
+    @apply --allcaps-style;
+    color: var(--sidebar-text-color);
+    font-size: 1.1em;
+  }
 
-	& > * {
-		display: block;
-		width: 18.2em;
-		margin-top: 2.5em;
-		border-top: 1px solid var(--rule-color);
-		padding-top: .7em;
-	}
+  & > * {
+    display: block;
+    width: 18.2em;
+    margin-top: 2.5em;
+    border-top: 1px solid var(--rule-color);
+    padding-top: .7em;
+  }
 }
 
 @media (--max-line-length) {
