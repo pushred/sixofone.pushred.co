@@ -1,18 +1,34 @@
 .form {
   @apply --reset;
 
-  float: left;
   position: relative;
   background-color: var(--background-color);
-  padding: 2rem 2rem 0 2rem;
+  padding: var(--form-padding) var(--form-padding) 0 var(--form-padding);
 
   & .button {
     position: absolute;
     top: calc(var(--button-size) * -1);
-    left: calc(var(--button-size) * -1);
+    right: 0;
   }
 
   & .button + .button {
-    top: calc(calc(var(--button-size) * 2) * -1.01);
+    right: auto;
+    left: 0;
+  }
+}
+
+@media (--max-line-length) {
+
+  .form {
+    float: left;
+
+    & .button {
+      top: calc(var(--button-size) * -1);
+      left: calc(var(--button-size) * -1) !important;
+    }
+
+    & .button + .button {
+      top: calc(calc(var(--button-size) * 2) * -1.01);
+    }
   }
 }

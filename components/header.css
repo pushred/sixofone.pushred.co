@@ -1,12 +1,11 @@
 .header {
-  width: 100vw;
   height: var(--header-size);
   overflow: hidden;
 
   &__nav {
     position: absolute;
-    top: var(--margin-space);
-    right: var(--margin-space);
+    top: var(--min-margin);
+    right: var(--min-margin);
     z-index: var(--header-nav-zindex);
   }
 
@@ -18,7 +17,7 @@
   &__nav_link {
     cursor: pointer;
     float: right;
-    margin-left: var(--gutter-space);
+    margin-left: var(--gutter);
   }
 
   &__nav_link svg {
@@ -44,5 +43,13 @@
     min-width: 100%;
     min-height: var(--header-size);
     z-index: var(--background-zindex);
+  }
+}
+
+@media (--max-line-length) {
+
+  .header__nav {
+    top: var(--margin);
+    right: var(--margin);
   }
 }

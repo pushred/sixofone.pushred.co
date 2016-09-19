@@ -36,6 +36,7 @@ gulp.task('bundleCSS', () => {
     .src('browser/index.css')
     .pipe(postcss([
       require('postcss-import'),
+      require('postcss-custom-media'),
       require('postcss-custom-properties'),
       require('postcss-apply'),
       require('postcss-nesting'),

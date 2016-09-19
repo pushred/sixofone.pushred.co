@@ -5,6 +5,9 @@
 
   &__control {
     @apply --headline-style;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
     border: 1px solid var(--90-gray-color);
     padding: .2em;
     background-color: var(--98-gray-color);
@@ -25,5 +28,12 @@
   &__text--var {
     color: var(--40-gray-color);
     font-style: normal;
+  }
+}
+
+@media (--max-line-length) {
+
+  .input__control {
+    width: auto;
   }
 }

@@ -10,6 +10,7 @@ a {
 p,
 ol,
 ul {
+  max-width: var(--max-line-length);
   margin: 1em 0;
   color: var(--text-color);
   font-family: var(--text-font);
@@ -18,9 +19,9 @@ ul {
 }
 
 .quote {
+  @apply --reset;
   width: 94%;
-  margin: 0 0 0 -4em;
-  padding: 0;
+  max-width: 53.5em;
 }
 
 .quote p {
@@ -31,4 +32,11 @@ ul {
   line-height: 1.2;
   letter-spacing: -0.04em;
   text-rendering: optimizeLegibility;
+}
+
+@media (--max-line-length) {
+
+  .quote {
+    margin-left: -4em;
+  }
 }

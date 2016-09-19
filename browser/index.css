@@ -8,12 +8,16 @@
 @import '../components/input';
 @import '../components/post';
 
+@custom-media --max-line-length (min-width: 71rem);
+
 :root {
   /* spacing */
 
-  --margin-space:           7rem;
-  --gutter-space:           3.2rem;
+  --margin:                 7rem;
+  --min-margin:             3.5rem;
+  --gutter:                 3.2rem;
   --form-padding:           2rem;
+  --max-line-length:        71rem;
 
   /* font stacks */
 
@@ -60,7 +64,7 @@
   /* sizes */
 
   --button-size:            3.2em;
-  --header-size:            90vh;
+  --header-size:            85vh;
   --headline-padding:       0.13em;
   --headline-crop-line:     1.47em;
 
