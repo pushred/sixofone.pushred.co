@@ -1,0 +1,19 @@
+.button {
+  @apply --reset-button;
+
+  display: block;
+  width: var(--button-size);
+  height: var(--button-size);
+
+  & span { @apply --hide-text; }
+
+  & svg {
+    width: 1.8em;
+    height: 1.8em;
+    color: var(--black-color);
+  }
+}
+
+.button--save { background-color: var(--save-button-color) }
+.button--modify { background-color: var(--modify-button-color) }
+.button--destroy { background-color: var(--destroy-button-color) }

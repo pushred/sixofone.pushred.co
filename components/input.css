@@ -1,0 +1,29 @@
+.input {
+  &__label {
+    @apply --hide-text;
+  }
+
+  &__control {
+    @apply --headline-style;
+    border: 1px solid var(--90-gray-color);
+    padding: .2em;
+    background-color: var(--98-gray-color);
+    font-size: 4.2em;
+    outline: none;
+  }
+
+  &__control:focus { border-color: var(--80-gray-color) }
+
+  &__text {
+    margin: 1em 0 0 0;
+    color: var(--70-gray-color);
+    font-family: var(--ui-font);
+    font-size: 1.4em;
+    line-height: 1;
+  }
+
+  &__text--var {
+    color: var(--40-gray-color);
+    font-style: normal;
+  }
+}

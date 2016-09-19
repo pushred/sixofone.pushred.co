@@ -31,7 +31,6 @@
 .post__header {
   width: 100vw;
   height: var(--header-size);
-  overflow: hidden;
   box-sizing: border-box;
   padding: 0 var(--margin-space);
 
@@ -40,8 +39,6 @@
 	left: 0;
   right: 0;
   z-index: var(--header-zindex);
-
-  mix-blend-mode: screen;
 
   &_title,
   &_title:after,
@@ -54,6 +51,12 @@
   &_content {
     position: absolute;
     bottom: 1.3em;
+    mix-blend-mode: screen;
+  }
+
+  &_content--modify {
+    bottom: 0;
+    mix-blend-mode: normal;
   }
 
   &_content:before {
@@ -68,17 +71,12 @@
 
   &_title {
     @apply --reset;
+    @apply --headline-style;
     display: inline;
     position: relative;
     width: 67%;
     border-top: var(--headline-padding) solid var(--knockout-color);
     padding-right: .25em;
-    font-family: var(--display-font);
-    font-size: 7.2em;
-    font-weight: 800;
-    letter-spacing: -0.029em;
-    line-height: 0.94;
-    text-rendering: optimizeLegibility;
     white-space: pre-wrap;
   }
 

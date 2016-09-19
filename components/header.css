@@ -11,7 +11,7 @@
   }
 
   &__nav .icon span {
-    @apply --image-replace;
+    @apply --hide-text;
   }
 
   &__logo,

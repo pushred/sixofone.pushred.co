@@ -1,0 +1,17 @@
+.form {
+  @apply --reset;
+
+  position: relative;
+  background-color: var(--background-color);
+  padding: 2rem 2rem 0 2rem;
+
+  & .button {
+    position: absolute;
+    top: calc(var(--button-size) * -1);
+    left: calc(var(--button-size) * -1);
+  }
+
+  & .button + .button {
+    top: calc(calc(var(--button-size) * 2) * -1.01);
+  }
+}
