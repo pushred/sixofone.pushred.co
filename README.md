@@ -15,7 +15,7 @@ Dependencies
 ------------
 
 **[node.js and npm][node]** generate new versions of the site and run a local preview server.<br>
-These can be installed together with easy installers downloadable at nodejs.org.
+These can be installed together with easy installers downloadable at nodejs.org
 
 **[Install the dependencies below][npm]** with `npm install`<br>
 If this runs into any trouble, please try npm’s recommendations on [fixing permissions][npm-permissions].
@@ -30,8 +30,12 @@ If this runs into any trouble, please try npm’s recommendations on [fixing per
 - [gulp-s3-upload][gulp-s3-upload] uploads piped files to a S3 bucket/CloudFront
 - [gulp-svgstore][svgstore] bundles SVG files into a [sprite][sprites]
 - [gulp-svgmin][svgmin] optimizes bundled SVGs and normalizes color with [SVGO][svgo]
+- [parameterize][parameterize] generates URL safe strings
+- [pouchdb][pouchdb] persists content with an in-browser database
 - [postcss][postcss] bundles and transpiles future CSS
 - [sharp][sharp] resizes images using [libvips][libvips]
+- [shortid][shortid] generates non-sequential unique IDs for slug conflict avoidance
+
 
 Development
 -----------
@@ -117,8 +121,11 @@ npm run task <name>
 [gulp]: http://gulpjs.com/
 [gulp-s3-upload]: https://github.com/clineamb/gulp-s3-upload
 [libvips]: http://www.vips.ecs.soton.ac.uk/
+[parameterize]: https://github.com/fyalavuz/node-parameterize
 [postcss]: http://postcss.org/
+[pouchdb]: https://pouchdb.com/
 [sharp]: https://github.com/lovell/sharp
+[shortid]: https://github.com/dylang/shortid
 [svgstore]: https://github.com/w0rm/gulp-svgstore
 [svgmin]: https://github.com/ben-eb/gulp-svgmin
 [svgo]: https://github.com/svg/svgo

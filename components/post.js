@@ -1,5 +1,10 @@
 const Delegate = require('dom-delegate');
 const parameterize = require('parameterize');
+const shortId = require('shortid');
+
+const db = require('../db');
+
+window.db = db;
 
 class Post {
 
@@ -50,7 +55,24 @@ class Post {
     this.title = newTitle;
     document.title = document.title.replace(oldTitle, newTitle);
 
-    this.toggleEdit();
+    this.toggleEdit(); // optimistically update
+
+    if (oldTitle === newTitle) return;
+
+    db.put({
+      _id: this.slug,
+      title: this.title,
+    })
+    .catch(err => {
+      var uniqueId = this.slug + '-' + shortId.generate().slice(-5); // greater risk of collision
+      db.put({
+        _id: uniqueId
+      })
+      .then(doc => {
+        this.slug = uniqueId;
+      })
+      .catch(err => alert); // TODO: display a nice red error
+    });
   }
 
   toggleEdit (event) {
