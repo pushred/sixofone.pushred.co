@@ -65,8 +65,9 @@
 
   --button-size:            3.2em;
   --header-size:            85vh;
-  --headline-padding:       0.13em;
-  --headline-crop-line:     1.47em;
+  --header-title-padding:   9px;
+  --header-title-crop-line: 1.47em;
+  --max-header-title-size:  7.2em;
 
   /* layers */
 
@@ -85,7 +86,7 @@
 
   --headline-style: {
     font-family: var(--display-font);
-    font-size: 7.2em;
+    font-size: 7vmax;
     font-weight: 800;
     letter-spacing: -0.029em;
     line-height: 0.94;

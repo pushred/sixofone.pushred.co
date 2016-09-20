@@ -38,20 +38,15 @@
   left: 0;
   z-index: var(--header-zindex);
 
-  &_title,
-  &_title:after,
-  &_title:before {
-    background-color: var(--knockout-color);
-  }
+  mix-blend-mode: screen;
 
   /* https://css-tricks.com/multi-line-padded-text/#article-header-id-0 */
 
   &_content {
     position: absolute;
     right: 0;
-    bottom: 1.3em;
+    bottom: 0;
     left: 0;
-    mix-blend-mode: screen;
   }
 
   &_content--modify {
@@ -63,9 +58,15 @@
     content: '';
     position: relative;
     top: 0;
-    left: calc(var(--headline-padding) * -1);
+    left: calc(var(--header-title-padding) * -1);
     bottom: 0;
-    width: var(--headline-padding);
+    width: var(--header-title-padding);
+    background-color: var(--knockout-color);
+  }
+
+  &_title,
+  &_title:after,
+  &_title:before {
     background-color: var(--knockout-color);
   }
 
@@ -75,21 +76,10 @@
     display: inline;
     position: relative;
     width: 67%;
-    border-top: var(--headline-padding) solid var(--knockout-color);
+    border-top: var(--header-title-padding) solid var(--knockout-color);
     padding-right: .25em;
     white-space: pre-wrap;
   }
-
-  &_title:after,
-  &_title:before {
-    content: '';
-    position: absolute;
-    top: var(--headline-crop-line);
-    bottom: calc(var(--headline-padding) * -1);
-    width: 100vw;
-  }
-
-  &_title:before { right: 0 }
 
   &_title span {
     position: relative;
@@ -99,12 +89,12 @@
   &_title span:before {
     content: '';
     position: absolute;
-    mix-blend-mode: overlay;
-    top: calc(var(--headline-padding) * -1);
-    left: calc(var(--headline-padding) * -2);
+    top: calc(var(--header-title-padding) * -1);
+    left: calc(var(--header-title-padding) * -2);
     bottom: 0;
     width: 2em;
     background: var(--knockout-color);
+    mix-blend-mode: multiply;
   }
 }
 
@@ -134,13 +124,33 @@
   }
 
   .post__header_content {
+    max-width: 64em;
     lost-column: 5/8;
     lost-offset: -1/8;
+    bottom: 6px; /* TODO: magic number! */
   }
 
   .post__header_content .form {
     margin-left: calc(var(--form-padding) * -1);
   }
+
+  .post__header_title {
+    font-size: var(--max-header-title-size);
+  }
+
+  /* crop bottom edge of photo to headline half x-height */
+
+  .post__header_title:after,
+  .post__header_title:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 100vw;
+    height: 0.6em;
+  }
+
+  .post__header_title:before { right: 100% }
+  .post__header_title:after { left: 100% }
 
   .post__meta,
   .post__body {

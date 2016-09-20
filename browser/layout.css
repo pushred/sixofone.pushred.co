@@ -3,6 +3,7 @@
 body {
   margin: 0;
   background-color: var(--background-color);
+  overflow-x: hidden; /* headline crop line 100vw bumpers */
 }
 
 .layout {

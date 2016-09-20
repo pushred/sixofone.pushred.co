@@ -35,5 +35,6 @@
 
   .input__control {
     width: auto;
+    font-size: var(--max-header-title-size);
   }
 }
