@@ -33,6 +33,7 @@
 
   --10-gray-color:          hsl(0,   0%,   10%);
   --20-gray-color:          hsl(0,   0%,   20%);
+  --30-gray-color:          hsl(0,   0%,   30%);
   --40-gray-color:          hsl(0,   0%,   40%);
   --50-gray-color:          hsl(0,   0%,   50%);
   --70-gray-color:          hsl(0,   0%,   70%);
@@ -47,11 +48,11 @@
   --input-text-color:       hsl(0,   0%,   100%);
   --input-border-color:     hsl(0,   0%,   100%);
 
-  --save-button-color:       hsl(87,  55%,  61%);
+  --save-button-color:      hsl(87,  55%,  61%);
   --modify-button-color:    hsl(54,  86%,  63%);
   --destroy-button-color:   hsl(16,  76%,  58%);
 
-  --disabled-button-color:  var(--90-gray-color);
+  --disabled-button-color:  var(--30-gray-color);
 
   --background-color:       var(--white-color);
   --knockout-color:         var(--white-color);

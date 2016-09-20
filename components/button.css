@@ -17,3 +17,5 @@
 .button--save { background-color: var(--save-button-color) }
 .button--modify { background-color: var(--modify-button-color) }
 .button--destroy { background-color: var(--destroy-button-color) }
+
+button[disabled] { background-color: var(--disabled-button-color) }

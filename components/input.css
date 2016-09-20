@@ -22,7 +22,7 @@
     color: var(--70-gray-color);
     font-family: var(--ui-font);
     font-size: 1.4em;
-    line-height: 1;
+    line-height: 1.3;
   }
 
   &__text--var {

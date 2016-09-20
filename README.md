@@ -17,7 +17,7 @@ Dependencies
 **[node.js and npm][node]** generate new versions of the site and run a local preview server.<br>
 These can be installed together with easy installers downloadable at nodejs.org.
 
-**[Install the dependencies below][npm]** with `npm install`.<br>
+**[Install the dependencies below][npm]** with `npm install`<br>
 If this runs into any trouble, please try npm’s recommendations on [fixing permissions][npm-permissions].
 
 ### Development

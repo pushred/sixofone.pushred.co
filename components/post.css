@@ -43,6 +43,7 @@
   /* https://css-tricks.com/multi-line-padded-text/#article-header-id-0 */
 
   &_content {
+    display: block;
     position: absolute;
     right: 0;
     bottom: 0;
@@ -50,7 +51,7 @@
   }
 
   &_content--modify {
-    bottom: 0;
+    bottom: 0 !important; /* override magic number */
     mix-blend-mode: normal;
   }
 
@@ -95,6 +96,12 @@
     width: 2em;
     background: var(--knockout-color);
     mix-blend-mode: multiply;
+  }
+
+  &_title + .button {
+    position: absolute;
+    top: calc((var(--header-title-padding) * -1) + (var(--button-size) * -1.16));
+    left: calc((var(--header-title-padding) * -2) + (var(--button-size) * -0.94));
   }
 }
 

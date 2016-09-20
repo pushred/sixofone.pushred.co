@@ -1,8 +1,10 @@
 const unorphan = require('unorphan');
 
-const Header = require('../components/header');
+const Post = require('../components/post');
 
 document.addEventListener('DOMContentLoaded', () => {
   unorphan('h1, p');
-  Header();
+
+  const post = new Post(document.querySelector('.post__header_content'));
+
 });
