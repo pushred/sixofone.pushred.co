@@ -28,10 +28,10 @@ If this runs into any trouble, please try npm’s recommendations on [fixing per
 - [env-cmd][env-cmd] sources environment variables crossplatform, from a JSON file
 - [gulp][gulp] runs tasks written in JavaScript
 - [gulp-s3-upload][gulp-s3-upload] uploads piped files to a S3 bucket/CloudFront
+- [gulp-svgstore][svgstore] bundles SVG files into a [sprite][sprites]
+- [gulp-svgmin][svgmin] optimizes bundled SVGs and normalizes color with [SVGO][svgo]
 - [postcss][postcss] bundles and transpiles future CSS
 - [sharp][sharp] resizes images using [libvips][libvips]
-- [svgstore][svgstore] bundles SVG files into a [sprite][sprites]
-- [svgmin][svgmin] optimizes bundled SVGs and normalizes color with [SVGO][svgo]
 
 Development
 -----------
@@ -39,7 +39,7 @@ Development
 Here’s a diagram of how everything is organized:
 
     ├── browser
-    │   └── :root variables, property sets, and global styles
+    │   └── bundle entries, CSS :root vars and global styles
     ├── components
     │   └── UI/design elements
     ├── exercise
@@ -48,12 +48,10 @@ Here’s a diagram of how everything is organized:
     │   └── build/development task orchestration
     ├── node_modules
     │   └── third-party code installed from the npm registry and GitHub
-    ├── server
-    │   └── generated static pages and files, Browsersync/CloudFront root
-    └── gulpfile.js
-        └── development tasks
+    └── server
+        └── generated static pages and files, Browsersync/CloudFront root
 
-### Scripts
+### npm Scripts
 
 ```sh
 npm run dev
@@ -93,15 +91,15 @@ npm run task <name>
 
 #### `bundleSVG`
 
-- Consolidates SVG files from `/server/files/icons` into a single file as `<symbol>` elements
+- Consolidates SVG files from `/server/files/icons` into a single file with `<symbol>`
 - Minifies SVG markup
-- Normalizes fill colors as `currentColor` value for cascading color from context 
+- Normalizes fill colors as `currentColor` value for cascading color from parent context 
 
 #### `resizeImages`
 
 - Generates a range of image sizes for JPEGs found within `server/files`
-- Uploads images to S3/CloudFront, accessible at `http://sixofone.pushred.co/files/*`
-- Generated files are suffixed with `-{width}w` for usage with srcset
+- Uploads images to S3/CloudFront, serving from `http://sixofone.pushred.co/files/*`
+- Suffix generated files with `-{width}w` for usage with srcset
 - The file closest to 300k is suffixed as `-fallback` for usage with `src`
 - The smallest file is suffixed as `-smallest` for usage in preview thumbnails, etc.
 
@@ -119,6 +117,7 @@ npm run task <name>
 [gulp]: http://gulpjs.com/
 [gulp-s3-upload]: https://github.com/clineamb/gulp-s3-upload
 [libvips]: http://www.vips.ecs.soton.ac.uk/
+[postcss]: http://postcss.org/
 [sharp]: https://github.com/lovell/sharp
 [svgstore]: https://github.com/w0rm/gulp-svgstore
 [svgmin]: https://github.com/ben-eb/gulp-svgmin
