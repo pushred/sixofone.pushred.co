@@ -8,8 +8,8 @@
   & span { @apply --hide-text; }
 
   & svg {
-    width: 1.8em;
-    height: 1.8em;
+    width: 2.6em;
+    height: 2.6em;
     color: var(--black-color);
   }
 }

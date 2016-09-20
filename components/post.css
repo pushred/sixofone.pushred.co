@@ -131,7 +131,7 @@
   }
 
   .post__header_content {
-    max-width: 64em;
+    max-width: 66em;
     lost-column: 5/8;
     lost-offset: -1/8;
     bottom: 6px; /* TODO: magic number! */
