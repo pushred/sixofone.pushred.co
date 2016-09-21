@@ -3,7 +3,11 @@ sixofone.pushred.co
 
 [![Semistandard Style][semistandard-badge]][semistandard]
 
-This is a post template for Six Of One. 
+This is a post template and title editor prototype for Six Of One. Pages are:
+
+ - Rendered statically with a JavaScript build process
+ - Hosted on Amazon S3
+ - Distributed globally over the Amazon CloudFront CDN
 
 Table of Contents
 -----------------
@@ -22,6 +26,7 @@ If this runs into any trouble, please try npm’s recommendations on [fixing per
 
 ### Development
 
+- [apex][apex] configures and deploys Lambda functions, easy CLI access to logs
 - [babel][babel] transpiles future JS
 - [Browserify][bs] bundles JavaScript using node’s CommonJS module system 
 - [Browsersync][bs] provides a local server with live reload across devices
@@ -38,9 +43,14 @@ If this runs into any trouble, please try npm’s recommendations on [fixing per
 
 ### Production
 
-- [S3][s3] 99.999999999% durable storage, Jeff’s good for the rest
-- [CloudFront][cloudfront] pay-as-you-go CDN
 - [Cloudant][cloudant] hosted pay-as-you-go CouchDB
+
+_AWS_
+
+- [API Gateway][apigateway] proxies CORS requests to Lambda
+- [CloudFront][cloudfront] pay-as-you-go CDN
+- [Lambda][lambda] on-demand page rendering, uploads to S3
+- [S3][s3] 99.999999999% durable storage
 
 Development
 -----------
@@ -88,14 +98,24 @@ npm run task:gulp <name>
 
 ### node Scripts
 
+#### `deploy`
+
+- Render and upload pages for every title in the database to S3
+- Upload every asset to S3
+
+#### `deploy:functions`
+
+- Requires [apex][apex]
+- Builds latest Lambda functions with browserify
+- Uploads built file to Lambda
+
 #### `seed`
 
 - Populate the database with a series of fixture documents
 
 #### `upload`
 
-- Render and upload pages for every title in the database to S3
-- Upload every asset to S3
+- Render and upload a new page for a given title and slug
 
 ### gulp Tasks
 
@@ -131,6 +151,8 @@ npm run task:gulp <name>
 [npm]: https://docs.npmjs.com/getting-started/installing-npm-packages-locally
 [npm-permissions]: https://docs.npmjs.com/getting-started/fixing-npm-permissions
 
+[apex]: http://apex.run/
+[apigateway]: https://aws.amazon.com/api-gateway/
 [babel]: https://babeljs.io/
 [browserify]: http://browserify.org/ 
 [bs]: https://www.browsersync.io/
@@ -139,6 +161,7 @@ npm run task:gulp <name>
 [env-cmd]: https://github.com/toddbluhm/env-cmd
 [gulp]: http://gulpjs.com/
 [gulp-s3-upload]: https://github.com/clineamb/gulp-s3-upload
+[lambda]: https://aws.amazon.com/lambda/
 [libvips]: http://www.vips.ecs.soton.ac.uk/
 [parameterize]: https://github.com/fyalavuz/node-parameterize
 [postcss]: http://postcss.org/

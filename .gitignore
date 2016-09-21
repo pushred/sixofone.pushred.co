@@ -2,3 +2,4 @@
 .env.json
 bundle.*
 node_modules
+tasks/functions/**/index.js

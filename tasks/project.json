@@ -1,0 +1,8 @@
+{
+  "name": "sixofone",
+  "memory": 128,
+  "timeout": 5,
+  "role": "arn:aws:iam::321553216550:role/sixofone_lambda_function",
+  "environment": {},
+  "profile": "sixofone"
+}

@@ -3,6 +3,8 @@
   "author": "Eric Lanehart <eric@pushred.co> (http://pushred.co)",
   "scripts": {
     "dev": "env-cmd ./.env.json gulp $1",
+    "deploy": "npm run task upload",
+    "deploy:functions": "cd tasks && apex deploy --env-file ../.env.json",
     "task": "cd tasks && env-cmd ../.env.json node $1",
     "task:gulp": "env-cmd ./.env.json gulp $1",
     "lint": "semistandard",
@@ -21,6 +23,7 @@
     "babel-core": "^6.14.0",
     "babel-preset-es2015": "^6.14.0",
     "babelify": "^7.3.0",
+    "brfs": "^1.4.3",
     "browserify": "^13.1.0",
     "chalk": "^1.1.3",
     "env-cmd": "github:sparkartgroup/env-cmd#json-env",

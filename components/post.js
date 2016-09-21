@@ -9,9 +9,15 @@ window.db = db;
 class Post {
 
   constructor (el) {
-    this.title = 'Untitled';
-    this.slug = 'untitled';
+    if (!/edit/.test(window.location.search)) return;
+
+    var slug;
+
+    if (/posts/.test(window.location.pathname)) slug = window.location.pathname.split('posts').pop();
+
     this.el = el;
+    this.title = this.el.querySelector('.post__header_title span').textContent;
+    this.slug = slug || 'please enter a post title';
     this.isEditing = false;
 
     el.innerHTML = renderTitle(this.title); // add edit button
@@ -63,6 +69,7 @@ class Post {
       _id: this.slug,
       title: this.title,
     })
+    .then(this.addPage)
     .catch(err => {
       var uniqueId = this.slug + '-' + shortId.generate().slice(-5); // greater risk of collision
       db.put({
@@ -70,8 +77,20 @@ class Post {
       })
       .then(doc => {
         this.slug = uniqueId;
+        this.addPage();
       })
-      .catch(err => alert); // TODO: display a nice red error
+      .catch(err => alert(err)); // TODO: display a nice red error
+    });
+  }
+
+  addPage () {
+    fetch('https://fxnaqc63j7.execute-api.us-east-1.amazonaws.com/production/posts', {
+      method: 'POST',
+      mode: 'cors',
+      body: JSON.stringify({
+        slug: this.slug,
+        title: this.title
+      })
     });
   }
 
