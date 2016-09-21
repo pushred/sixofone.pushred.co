@@ -15,5 +15,5 @@ const db = require('../db');
     title: title
   })
   .then(doc => console.info(chalk.green('✓'), chalk.gray(doc.id)))
-  .catch(err => console.error(chalk.red(err)));
+  .catch(err => console.error(chalk.red(JSON.stringify(err))));
 });

@@ -40,6 +40,7 @@ If this runs into any trouble, please try npm’s recommendations on [fixing per
 
 - [S3][s3] 99.999999999% durable storage, Jeff’s good for the rest
 - [CloudFront][cloudfront] pay-as-you-go CDN
+- [Cloudant][cloudant] hosted pay-as-you-go CouchDB
 
 Development
 -----------
@@ -133,6 +134,7 @@ npm run task:gulp <name>
 [babel]: https://babeljs.io/
 [browserify]: http://browserify.org/ 
 [bs]: https://www.browsersync.io/
+[cloudant]: https://cloudant.com/
 [cloudfront]: https://aws.amazon.com/cloudfront/
 [env-cmd]: https://github.com/toddbluhm/env-cmd
 [gulp]: http://gulpjs.com/
