@@ -23,7 +23,7 @@ If this runs into any trouble, please try npm’s recommendations on [fixing per
 ### Development
 
 - [babel][babel] transpiles future JS
-- [Browserify][bs] bundles JavaScript using node's CommonJS module system 
+- [Browserify][bs] bundles JavaScript using node’s CommonJS module system 
 - [Browsersync][bs] provides a local server with live reload across devices
 - [env-cmd][env-cmd] sources environment variables crossplatform, from a JSON file
 - [gulp][gulp] runs tasks written in JavaScript
@@ -36,6 +36,10 @@ If this runs into any trouble, please try npm’s recommendations on [fixing per
 - [sharp][sharp] resizes images using [libvips][libvips]
 - [shortid][shortid] generates non-sequential unique IDs for slug conflict avoidance
 
+### Production
+
+- [S3][s3] 99.999999999% durable storage, Jeff’s good for the rest
+- [CloudFront][cloudfront] pay-as-you-go CDN
 
 Development
 -----------
@@ -75,10 +79,22 @@ npm run lint:staged
 
 ```sh
 npm run task <name>
+npm run task:gulp <name>
 ```
 
 - Source environment variables
-- Run a specified gulp task
+- Run a specified node script or gulp task
+
+### node Scripts
+
+#### `seed`
+
+- Populate the database with a series of fixture documents
+
+#### `upload`
+
+- Render and upload pages for every title in the database to S3
+- Upload every asset to S3
 
 ### gulp Tasks
 
@@ -117,6 +133,7 @@ npm run task <name>
 [babel]: https://babeljs.io/
 [browserify]: http://browserify.org/ 
 [bs]: https://www.browsersync.io/
+[cloudfront]: https://aws.amazon.com/cloudfront/
 [env-cmd]: https://github.com/toddbluhm/env-cmd
 [gulp]: http://gulpjs.com/
 [gulp-s3-upload]: https://github.com/clineamb/gulp-s3-upload
@@ -125,6 +142,7 @@ npm run task <name>
 [postcss]: http://postcss.org/
 [pouchdb]: https://pouchdb.com/
 [sharp]: https://github.com/lovell/sharp
+[s3]: https://aws.amazon.com/s3/
 [shortid]: https://github.com/dylang/shortid
 [svgstore]: https://github.com/w0rm/gulp-svgstore
 [svgmin]: https://github.com/ben-eb/gulp-svgmin

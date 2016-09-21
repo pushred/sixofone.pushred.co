@@ -3,7 +3,8 @@
   "author": "Eric Lanehart <eric@pushred.co> (http://pushred.co)",
   "scripts": {
     "dev": "env-cmd ./.env.json gulp $1",
-    "task": "env-cmd ./.env.json gulp $1",
+    "task": "cd tasks && env-cmd ../.env.json node $1",
+    "task:gulp": "env-cmd ./.env.json gulp $1",
     "lint": "semistandard",
     "lint:staged": "semistandard $(git status --porcelain | grep -E '(M|A)?(\\s\\s|M|A).*.js$' | awk '{print $2}' | tr '\n' ' ')"
   },
@@ -49,6 +50,7 @@
     "semistandard": "^9.0.0"
   },
   "dependencies": {
+    "aws-sdk": "^2.6.4",
     "dom-delegate": "^2.0.3",
     "lodash": "^4.15.0",
     "npm": "^3.10.7",
