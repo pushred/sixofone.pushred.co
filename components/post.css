@@ -38,7 +38,11 @@
   left: 0;
   z-index: var(--header-zindex);
 
-  mix-blend-mode: screen;
+  mix-blend-mode: screen; /* cannot be moved deeper, only works against direct parent */
+
+  &--modify {
+    mix-blend-mode: normal;
+  }
 
   /* https://css-tricks.com/multi-line-padded-text/#article-header-id-0 */
 
@@ -50,9 +54,8 @@
     left: 0;
   }
 
-  &_content--modify {
+  &--modify .post__header_content {
     bottom: 0 !important; /* override magic number */
-    mix-blend-mode: normal;
   }
 
   &_content:before {

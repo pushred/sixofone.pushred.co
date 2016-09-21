@@ -101,14 +101,14 @@ class Post {
 
     if (this.isEditing) {
       this.el.innerHTML = renderInput(this.title, this.slug);
-      this.el.classList.add('post__header_content--modify');
+      document.querySelector('.post__header').classList.add('post__header--modify');
       this.inputEl = this.el.querySelector('.input__control');
       this.slugEl = this.el.querySelector('.input__text--var');
       this.inputEl.focus();
       this.inputEl.value = this.inputEl.value; // send cursor to the end
     } else {
       this.el.innerHTML = renderTitle(this.title);
-      this.el.classList.remove('post__header_content--modify');
+      document.querySelector('.post__header').classList.remove('post__header--modify');
     }
   }
 
