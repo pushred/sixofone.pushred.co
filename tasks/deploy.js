@@ -6,28 +6,33 @@ const chalk = require('chalk');
 const db = require('../db');
 const upload = require('./upload');
 
-db.allDocs({
-  include_docs: true
-}).then(docs => {
-  docs.rows.forEach(row => {
-    upload.page(row)
-      .then(res => console.log(chalk.green('✓'), chalk.gray('/posts/' + row.id)))
-      .catch(err => console.error(chalk.red(JSON.stringify(err))));
-  });
-});
-
 const assets = fs.readdirSync(path.join(__dirname, '..', 'server', 'files')).filter(path.extname); // fs.stat'd be better
 const fonts = fs.readdirSync(path.join(__dirname, '..', 'server', 'files', 'fonts')).filter(path.extname); // but we don't need it today
 
-assets.forEach(filename => {
-  upload.asset(filename)
-    .then(res => console.log(chalk.green('✓'), chalk.gray(filename)))
-    .catch(err => console.error(chalk.red(JSON.stringify(err))));
-});
+Promise.all(assets.map(filename => uploadAsset(filename)))
+  .then(revs => {
+    db.allDocs({
+      include_docs: true
+    }).then(docs => {
+      docs.rows.forEach(row => {
+        upload.page(row, revs)
+          .then(res => console.log(chalk.green('✓'), chalk.gray('/posts/' + row.id)))
+          .catch(err => console.error(chalk.red(JSON.stringify(err))));
+      });
+    });
+  })
+  .catch(err => console.error(chalk.red(JSON.stringify(err))));
+
+function uploadAsset (filename) {
+  return upload.asset(filename)
+    .then(file => {
+      console.log(chalk.green('✓'), chalk.gray(file.fingerprintedFilename))
+      return Promise.resolve(file);
+    });
+}
 
 fonts.forEach(filename => {
   upload.asset('fonts/' + filename)
     .then(res => console.log(chalk.green('✓'), chalk.gray(filename)))
     .catch(err => console.error(chalk.red(JSON.stringify(err))));
 });
-
