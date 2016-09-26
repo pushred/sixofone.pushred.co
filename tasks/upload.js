@@ -31,6 +31,7 @@ function uploadAsset (filename) {
     '.css': 'text/css',
     '.eot': 'application/vnd.ms-fontobject',
     '.js': 'application/javascript',
+    '.png': 'image/png',
     '.svg': 'image/svg+xml',
     '.ttf': 'application/octet-stream',
     '.woff': 'application/font-woff'
