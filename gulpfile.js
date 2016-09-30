@@ -25,7 +25,7 @@ gulp.task('default', () => {
     open: false
   });
 
-  watch(['server/*.html'], () => browserSync.reload);
+  watch(['server/*.html'], () => browserSync.reload());
   watch(['{browser,components}/**/*.css'], () => run('bundleCSS', browserSync.reload));
   watch(['{browser,components}/**/*.js'], () => run('bundleJS', browserSync.reload));
   watch(['server/icons/**/*.svg'], () => run('bundleSVG'));
