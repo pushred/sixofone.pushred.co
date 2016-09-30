@@ -34,7 +34,7 @@
 @media (--max-line-length) {
 
   .input__control {
-    width: auto;
+    width: 80vw;
     font-size: var(--max-header-title-size);
   }
 }

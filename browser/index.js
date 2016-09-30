@@ -1,3 +1,4 @@
+const debounce = require('lodash/debounce');
 const unorphan = require('unorphan');
 
 const Post = require('../components/post');
@@ -7,4 +8,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const post = new Post(document.querySelector('.post__header_content'));
 
+  window.addEventListener('resize', debounce(() => post.renderTitle(), 250));
 });

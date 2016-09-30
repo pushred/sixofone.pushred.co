@@ -37,7 +37,11 @@ gulp.task('bundleCSS', () => {
     .pipe(postcss([
       require('postcss-import'),
       require('postcss-custom-media'),
-      require('postcss-custom-properties'),
+      require('postcss-custom-properties')({
+        variables: require('./vars.json'),
+        appendVariables: true,
+        preserve: 'computed'
+      }),
       require('postcss-apply'),
       require('postcss-nesting'),
       require('lost'),
