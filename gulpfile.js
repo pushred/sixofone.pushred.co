@@ -1,6 +1,7 @@
 const browserify = require('browserify');
 const browserSync = require('browser-sync').create();
 const cleanUrls = require('clean-urls');
+const envify = require('envify');
 const gulp = require('gulp');
 const log = require('gulplog');
 const postcss = require('gulp-postcss');
@@ -53,6 +54,7 @@ gulp.task('bundleCSS', () => {
 
 gulp.task('bundleJS', () => {
   return browserify('browser/index.js')
+    .transform('envify')
     .transform('babelify', { presets: ['es2015'] })
     .bundle()
     .pipe(source('bundle.js'))
