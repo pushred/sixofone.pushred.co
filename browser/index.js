@@ -9,4 +9,5 @@ document.addEventListener('DOMContentLoaded', () => {
   const post = new Post(document.querySelector('.post__header_content'));
 
   window.addEventListener('resize', debounce(() => post.renderTitle(), 250));
+  window.addEventListener('load', () => post.renderTitle()); // render again once image is loaded
 });
