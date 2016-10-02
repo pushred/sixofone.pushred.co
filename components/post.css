@@ -59,13 +59,14 @@
   }
 
   &_title {
-    width: 100vw;
+    width: 100%;
     fill: #fff;
     font-size: var(--max-header-title-size);
   }
 
-  &_title text {
+  &_title tspan {
     font-family: var(--display-font);
+    baseline-shift: -2px;
   }
 
   &_title + .button {
@@ -96,19 +97,14 @@
 @media (--max-line-length) {
 
   .post__header_content {
-    lost-column: 5/8;
+    lost-column: 7/8;
     lost-offset: -1/8;
-    lost-center: 66em;
     margin-left: calc(99.9% * (-1/8 * -1) - (0px - 0px * (-1/8 * -1)) - var(--title-padding)) !important;
     /* generated output from above, need access via plugin - https://git.io/vPtcO */
   }
 
   .post__header_content_offset {
     margin-left: calc(var(--title-padding) * -1);
-  }
-
-  .post__header_title {
-    width: auto;
   }
 
   .post__meta,

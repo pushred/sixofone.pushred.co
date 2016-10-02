@@ -7,8 +7,6 @@ const wordWrap = require('word-wrap');
 const db = require('../db');
 const vars = require('../vars.json');
 
-window.db = db;
-
 class Post {
 
   constructor (el) {
@@ -100,36 +98,31 @@ class Post {
     });
   }
 
-  renderTitle (isUpdate) {
+  renderTitle () {
     if (this.isEditing) return;
 
     var { backgroundEl, el, isEditable, title } = this;
 
-    const lines = wordWrap(title, {width: 17}).split('\n').map((line, index) => {
-      let offset = index + 1 + 'em';
-      return `<text x="${vars['title-padding']}" dy="${offset}" fill="url(#background)">${line}</text>`;
-    });
-
-    const bg = backgroundEl.getBoundingClientRect();
+    const lines = wordWrap(title, { width: 17 }).split('\n');
+    const bgRect = backgroundEl.getBoundingClientRect();
     const elOffset = (el.getBoundingClientRect().left * -1);
 
-    // first pass render to get groupRect
-    el.innerHTML = renderLockup(lines, isEditable, bg);
+    // first pass render to get rect
+    el.innerHTML = renderLockup(lines, bgRect, isEditable);
 
-    setTimeout(() => {
-      const groupEl = el.querySelector('g');
+    const lockupEl = el.querySelector('g');
 
-      groupEl.querySelectorAll('text').forEach((lineEl, index) => {
-        let offset = index + 'em';
-        groupEl.insertAdjacentHTML('afterbegin', `
-          <rect x="0" y="${offset}" width="${lineEl.getComputedTextLength() + 40 + 'px'}" height="1.4em" fill="white" fill-opacity="${this.params.opacity || 1}"></rect>
-        `); // 40 = box padding + ligature overlap?
-      });
+    lockupEl.querySelectorAll('tspan').forEach((lineEl, index) => {
+      let offset = 79 * index;
+      lockupEl.insertAdjacentHTML('afterbegin', `
+        <rect x="0" y="${offset}" width="${lineEl.getComputedTextLength() + 40}" height="80px" fill="white" fill-opacity="${this.params.opacity || 1}"></rect>
+      `); // 40 = box padding + ligature overlap?
+    });
 
-      const groupRect = groupEl.getBoundingClientRect();
+    const lockupRect = lockupEl.getBoundingClientRect();
+    if (isEditable) el.insertAdjacentHTML('beforeend', renderEditButton(lockupRect.top));
 
-      el.innerHTML = renderLockup(groupEl.innerHTML, isEditable, bg, groupRect, backgroundEl.currentSrc);
-    }, 1); // wait for font rendering?
+    el.querySelector('svg').innerHTML = renderBackground(bgRect, lockupRect, lockupEl.innerHTML, backgroundEl.currentSrc);
   }
 
   toggleEdit (event) {
@@ -163,27 +156,30 @@ class Post {
 
 module.exports = Post;
 
-function renderLockup (lines, isEditable, bgRect, groupRect, imageUrl) {
-  if (!groupRect) return `<svg class="post__header_title"><g>${lines}</g></svg>`;
-
-  const editEl = isEditable && renderEditButton(groupRect.top) || '';
-
-  const viewBox = `0 0 ${bgRect.width} ${groupRect.height}`;
+function renderLockup (lines, bgRect) {
+  const text = `<text fill="url(#background)">` + lines.map((line, index) =>
+    `<tspan x="${vars['title-padding']}" dy="68px">${line.trim()}</tspan>`
+  ).join(' ') + `</text>`;
 
   return `
-    <svg class="post__header_title" width="${bgRect.width}" height="${groupRect.height}" viewbox="${viewBox}">
-      <defs>
-        <pattern id="background" patternUnits="userSpaceOnUse" width="${bgRect.width}" height="${bgRect.height}">
-          <image xlink:href="${imageUrl}" x="${groupRect.left * -1}" y="${(window.scrollY + groupRect.top - 23) * -1}" width="${bgRect.width}" height="${bgRect.height}" />
-        </pattern>
-      </defs>
-      <g>${lines}</g>
+    <svg class="post__header_title" width="${bgRect.width}" height="${lines.length * 80}">
+      <g>${text}</g>
     </svg>
-    ${editEl}
   `;
 }
 
-function renderEditButton (topY) {
+function renderBackground (bgRect, lockupRect, content, imageUrl) {
+  return `
+    <defs>
+      <pattern id="background" patternUnits="userSpaceOnUse" width="${bgRect.width}" height="${bgRect.height}">
+        <image xlink:href="${imageUrl}" x="${(lockupRect.left) * -1}" y="${(window.scrollY + lockupRect.top) * -1}" width="${bgRect.width}" height="${bgRect.height}" />
+      </pattern>
+    </defs>
+    <g>${content}</g>
+  `;
+}
+
+function renderEditButton () {
   return `
     <button class="button button--modify" title="Change">
       <span>Change</span>
