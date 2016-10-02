@@ -110,7 +110,7 @@ class Post {
     // first pass render to get rect
     el.innerHTML = renderLockup(lines, bgRect, isEditable);
 
-    const lockupEl = el.querySelector('g');
+    var lockupEl = el.querySelector('g');
 
     lockupEl.querySelectorAll('tspan').forEach((lineEl, index) => {
       let offset = 79 * index;
@@ -122,7 +122,16 @@ class Post {
     const lockupRect = lockupEl.getBoundingClientRect();
     if (isEditable) el.insertAdjacentHTML('beforeend', renderEditButton(lockupRect.top));
 
-    el.querySelector('svg').innerHTML = renderBackground(bgRect, lockupRect, lockupEl.innerHTML, backgroundEl.currentSrc);
+    el.querySelector('svg').innerHTML = renderBackground(bgRect, lockupRect, lockupEl.innerHTML, backgroundEl);
+  }
+
+  redrawTitle () {
+    const lockupEl = this.el.querySelector('g');
+    if (!lockupEl) return;
+
+    const lockupRect = lockupEl.getBoundingClientRect();
+
+    this.el.querySelector('svg').innerHTML = renderBackground(bgRect, lockupRect, lockupEl.innerHTML, this.backgroundEl);
   }
 
   toggleEdit (event) {
@@ -168,11 +177,11 @@ function renderLockup (lines, bgRect) {
   `;
 }
 
-function renderBackground (bgRect, lockupRect, content, imageUrl) {
+function renderBackground (bgRect, lockupRect, content, bgEl) {
   return `
     <defs>
       <pattern id="background" patternUnits="userSpaceOnUse" width="${bgRect.width}" height="${bgRect.height}">
-        <image xlink:href="${imageUrl}" x="${(lockupRect.left) * -1}" y="${(window.scrollY + lockupRect.top) * -1}" width="${bgRect.width}" height="${bgRect.height}" />
+        <image xlink:href="${bgEl.currentSrc}" x="${(lockupRect.left) * -1}" y="${(window.scrollY + lockupRect.top) * -1}" width="${bgRect.width}" height="${bgRect.height}" />
       </pattern>
     </defs>
     <g>${content}</g>
