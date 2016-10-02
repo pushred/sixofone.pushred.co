@@ -170,8 +170,11 @@ function renderLockup (lines, bgRect) {
     `<tspan x="${vars['title-padding']}" dy="68px">${line.trim()}</tspan>`
   ).join(' ') + `</text>`;
 
+  const width = bgRect.width;
+  const height = lines.length * 80 + 10; // 10px to avoid cropped descenders
+
   return `
-    <svg class="post__header_title" width="${bgRect.width}" height="${lines.length * 80}">
+    <svg class="post__header_title" width="${width}" height="${height}">
       <g>${text}</g>
     </svg>
   `;
