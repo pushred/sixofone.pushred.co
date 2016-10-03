@@ -74,7 +74,7 @@ class Post {
       _id: this.slug,
       title: this.title
     })
-    .then(this.addPage)
+    .then(() => this.addPage())
     .catch(err => {
       if (err) throw err;
 
@@ -91,12 +91,14 @@ class Post {
   }
 
   addPage () {
-    window.fetch('https://fxnaqc63j7.execute-api.us-east-1.amazonaws.com/production/posts', {
+    const { slug, title } = this;
+
+    fetch('https://fxnaqc63j7.execute-api.us-east-1.amazonaws.com/production/posts', {
       method: 'POST',
       mode: 'cors',
       body: JSON.stringify({
-        slug: this.slug,
-        title: this.title
+        slug,
+        title
       })
     });
   }
