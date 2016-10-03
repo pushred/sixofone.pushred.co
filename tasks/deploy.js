@@ -14,9 +14,9 @@ Promise.all(assets.map(filename => uploadAsset(filename)))
     db.allDocs({
       include_docs: true
     }).then(docs => {
-      docs.rows.forEach(row => {
+      docs.rows.forEach((row, index) => {
         upload.page(row, revs)
-          .then(res => console.log(chalk.green('✓'), chalk.gray('/posts/' + row.id)))
+          .then(res => console.log(chalk.green('✓'), chalk.white('/posts/' + row.id), chalk.gray(res.ETag)))
           .catch(err => console.error(chalk.red(JSON.stringify(err))));
       });
     });
@@ -26,13 +26,13 @@ Promise.all(assets.map(filename => uploadAsset(filename)))
 function uploadAsset (filename) {
   return upload.asset(filename)
     .then(file => {
-      console.log(chalk.green('✓'), chalk.gray(file.fingerprintedFilename));
+      console.log(chalk.green('✓'), chalk.white(file.fingerprintedFilename), chalk.gray(file.ETag));
       return Promise.resolve(file);
     });
 }
 
 fonts.forEach(filename => {
   upload.asset('fonts/' + filename)
-    .then(res => console.log(chalk.green('✓'), chalk.gray(filename)))
+    .then(res => console.log(chalk.green('✓'), chalk.white(filename), chalk.gray(res.ETag)))
     .catch(err => console.error(chalk.red(JSON.stringify(err))));
 });

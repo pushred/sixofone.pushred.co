@@ -21,7 +21,8 @@ function upload (doc, revs) {
       Bucket: process.env.S3_BUCKET,
       Key: 'posts/' + doc.id,
       Body: markup,
-      ContentType: 'text/html'
+      ContentType: 'text/html',
+      CacheControl: 'public, max-age=31536000, no-cache'
     }).promise();
 }
 
@@ -45,11 +46,13 @@ function uploadAsset (filename) {
       Bucket: process.env.S3_BUCKET,
       Key: 'files/' + fingerprintedFilename,
       Body: fs.readFileSync(path.join(__dirname, '..', 'server', 'files', filename)),
-      ContentType: types[path.extname(filename)]
+      ContentType: types[path.extname(filename)],
+      CacheControl: 'public, max-age=31536000'
     }).promise()
     .then(res => Promise.resolve({
       filename,
-      fingerprintedFilename
+      fingerprintedFilename,
+      ETag: res.ETag
     }));
 }
 
