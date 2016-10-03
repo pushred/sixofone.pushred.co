@@ -26,7 +26,7 @@ Promise.all(assets.map(filename => uploadAsset(filename)))
 function uploadAsset (filename) {
   return upload.asset(filename)
     .then(file => {
-      console.log(chalk.green('✓'), chalk.gray(file.fingerprintedFilename))
+      console.log(chalk.green('✓'), chalk.gray(file.fingerprintedFilename));
       return Promise.resolve(file);
     });
 }

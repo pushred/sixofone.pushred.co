@@ -4,12 +4,12 @@ const parameterize = require('parameterize');
 const db = require('../db');
 
 [
-  "Are we out of the woods yet?",
-  "It is impossible to walk rapidly and be unhappy.",
-  "We don’t get offered crises, they arrive.",
-  "I have seen the future and it doesn’t work.",
-  "I dwell in possibility...",
-  "Knowledge is power."
+  'Are we out of the woods yet?',
+  'It is impossible to walk rapidly and be unhappy.',
+  'We don’t get offered crises, they arrive.',
+  'I have seen the future and it doesn’t work.',
+  'I dwell in possibility...',
+  'Knowledge is power.'
 ].forEach(title => {
   db.put({
     _id: parameterize(title),

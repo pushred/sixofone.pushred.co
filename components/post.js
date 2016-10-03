@@ -38,7 +38,7 @@ class Post {
     // setup handlers for events bubbling to the element
 
     Object.keys(events).forEach(name => {
-      event = name.split(/\s/).filter(Boolean);
+      let event = name.split(/\s/).filter(Boolean);
       delegate.on(event[0], event[1], eventObj => events[name].call(this, eventObj));
     });
   }
@@ -71,10 +71,12 @@ class Post {
 
     db.put({
       _id: this.slug,
-      title: this.title,
+      title: this.title
     })
     .then(this.addPage)
     .catch(err => {
+      if (err) throw err;
+
       var uniqueId = this.slug + '-' + shortId.generate().slice(-5); // greater risk of collision
       db.put({
         _id: uniqueId
@@ -83,12 +85,12 @@ class Post {
         this.slug = uniqueId;
         this.addPage();
       })
-      .catch(err => alert(err)); // TODO: display a nice red error
+      .catch(err => window.alert(err)); // TODO: display a nice red error
     });
   }
 
   addPage () {
-    fetch('https://fxnaqc63j7.execute-api.us-east-1.amazonaws.com/production/posts', {
+    window.fetch('https://fxnaqc63j7.execute-api.us-east-1.amazonaws.com/production/posts', {
       method: 'POST',
       mode: 'cors',
       body: JSON.stringify({
@@ -105,7 +107,6 @@ class Post {
 
     const lines = wordWrap(title, { width: 17 }).split('\n');
     const bgRect = backgroundEl.getBoundingClientRect();
-    const elOffset = (el.getBoundingClientRect().left * -1);
 
     // first pass render to get rect
     el.innerHTML = renderLockup(lines, bgRect, isEditable);
@@ -129,6 +130,7 @@ class Post {
     const lockupEl = this.el.querySelector('g');
     if (!lockupEl) return;
 
+    const bgRect = this.backgroundEl.getBoundingClientRect();
     const lockupRect = lockupEl.getBoundingClientRect();
 
     this.el.querySelector('svg').innerHTML = renderBackground(bgRect, lockupRect, lockupEl.innerHTML, this.backgroundEl);

@@ -1,9 +1,7 @@
 const browserify = require('browserify');
 const browserSync = require('browser-sync').create();
 const cleanUrls = require('clean-urls');
-const envify = require('envify');
 const gulp = require('gulp');
-const log = require('gulplog');
 const postcss = require('gulp-postcss');
 const rename = require('gulp-rename');
 const run = require('run-sequence');
@@ -46,7 +44,7 @@ gulp.task('bundleCSS', () => {
       require('postcss-apply'),
       require('postcss-nesting'),
       require('lost'),
-      require('autoprefixer')({ browsers: ['last 2 versions', 'ie 9']})
+      require('autoprefixer')({ browsers: ['last 2 versions', 'ie 9'] })
     ]))
     .pipe(rename('bundle.css'))
     .pipe(gulp.dest('server/files'));

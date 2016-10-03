@@ -2,7 +2,6 @@ const fs = require('fs');
 const path = require('path');
 
 const AWS = require('aws-sdk');
-const chalk = require('chalk');
 const shortId = require('shortid');
 
 const s3 = new AWS.S3({ apiVersion: '2006-03-01' });
@@ -10,11 +9,11 @@ const s3 = new AWS.S3({ apiVersion: '2006-03-01' });
 const template = fs.readFileSync(path.join(__dirname, '..', 'server', 'index.html'), 'utf-8');
 
 function upload (doc, revs) {
-  var markup = template.replace(/\${title}/g, doc.doc.title).replace(/\${slug}/g, doc.id)
+  var markup = template.replace(/\${title}/g, doc.doc.title).replace(/\${slug}/g, doc.id);
 
   // use fingerprinted assets
   revs.forEach(file => {
-    markup = markup.replace(file.filename, file.fingerprintedFilename)
+    markup = markup.replace(file.filename, file.fingerprintedFilename);
   });
 
   return s3
