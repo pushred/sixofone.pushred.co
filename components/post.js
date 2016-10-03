@@ -1,4 +1,5 @@
 const Delegate = require('dom-delegate');
+const forEach = require('lodash/forEach');
 const parameterize = require('parameterize');
 const qs = require('querystring');
 const shortId = require('shortid');
@@ -111,13 +112,21 @@ class Post {
     // first pass render to get rect
     el.innerHTML = renderLockup(lines, bgRect, isEditable);
 
-    var lockupEl = el.querySelector('g');
+    const lockupEl = el.querySelector('g');
 
-    lockupEl.querySelectorAll('tspan').forEach((lineEl, index) => {
+    forEach(lockupEl.querySelectorAll('tspan'), (lineEl, index) => {
       let offset = 79 * index;
-      lockupEl.insertAdjacentHTML('afterbegin', `
-        <rect x="0" y="${offset}" width="${lineEl.getComputedTextLength() + 40}" height="80px" fill="white" fill-opacity="${this.params.opacity || 1}"></rect>
-      `); // 40 = box padding + ligature overlap?
+
+      const rectEl = document.createElement('rect');
+
+      rectEl.setAttribute('x', '0')
+      rectEl.setAttribute('y', offset)
+      rectEl.setAttribute('width', lineEl.getComputedTextLength() + 40) // 40 = box padding + ligature overlap?
+      rectEl.setAttribute('height', '80px')
+      rectEl.setAttribute('fill', 'white')
+      rectEl.setAttribute('fill-opacity', this.params.opacity || 1);
+
+      lockupEl.insertBefore(rectEl, lockupEl.firstChild);
     });
 
     const lockupRect = lockupEl.getBoundingClientRect();
@@ -186,7 +195,7 @@ function renderBackground (bgRect, lockupRect, content, bgEl) {
   return `
     <defs>
       <pattern id="background" patternUnits="userSpaceOnUse" width="${bgRect.width}" height="${bgRect.height}">
-        <image xlink:href="${bgEl.currentSrc}" x="${(lockupRect.left) * -1}" y="${(window.scrollY + lockupRect.top) * -1}" width="${bgRect.width}" height="${bgRect.height}" />
+        <image xlink:href="${bgEl.currentSrc}" x="${(lockupRect.left - 20) * -1}" y="${(window.scrollY + lockupRect.top - 2) * -1}" width="${bgRect.width}" height="${bgRect.height}" />
       </pattern>
     </defs>
     <g>${content}</g>
