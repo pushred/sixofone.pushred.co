@@ -121,11 +121,11 @@ class Post {
 
       const rectEl = document.createElement('rect');
 
-      rectEl.setAttribute('x', '0')
-      rectEl.setAttribute('y', offset)
-      rectEl.setAttribute('width', lineEl.getComputedTextLength() + 40) // 40 = box padding + ligature overlap?
-      rectEl.setAttribute('height', '80px')
-      rectEl.setAttribute('fill', 'white')
+      rectEl.setAttribute('x', '0');
+      rectEl.setAttribute('y', offset);
+      rectEl.setAttribute('width', lineEl.getComputedTextLength() + 40); // 40 = box padding + ligature overlap?
+      rectEl.setAttribute('height', '80px');
+      rectEl.setAttribute('fill', 'white');
       rectEl.setAttribute('fill-opacity', this.params.opacity || 1);
 
       lockupEl.insertBefore(rectEl, lockupEl.firstChild);
