@@ -11,11 +11,15 @@ const fonts = fs.readdirSync(path.join(__dirname, '..', 'server', 'files', 'font
 
 Promise.all(assets.map(filename => uploadAsset(filename)))
   .then(revs => {
+    upload.template(revs)
+      .then(res => console.log(chalk.green('✓'), chalk.white('postTemplate.html'), chalk.gray(res.ETag)))
+      .catch(err => console.error(chalk.red(JSON.stringify(err))));
+
     db.allDocs({
       include_docs: true
     }).then(docs => {
       docs.rows.forEach((row, index) => {
-        upload.page(row, revs)
+        upload.page({ doc: row, revs: revs })
           .then(res => console.log(chalk.green('✓'), chalk.white('/posts/' + row.id), chalk.gray(res.ETag)))
           .catch(err => console.error(chalk.red(JSON.stringify(err))));
       });

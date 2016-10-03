@@ -1,6 +1,6 @@
 {
   "description": "Render and upload a page with given title/slug to S3",
   "hooks": {
-    "build": "../../../node_modules/.bin/browserify index.src.js -o index.js --bare --exclude aws-sdk -s default -t brfs"
+    "build": "../../../node_modules/.bin/browserify index.src.js -o index.js --bare --exclude aws-sdk -s default -t brfs -t babelify"
   }
 }

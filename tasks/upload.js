@@ -6,15 +6,39 @@ const shortId = require('shortid');
 
 const s3 = new AWS.S3({ apiVersion: '2006-03-01' });
 
-const template = fs.readFileSync(path.join(__dirname, '..', 'server', 'index.html'), 'utf-8');
+const defaultTemplate = fs.readFileSync(path.join(__dirname, '..', 'server', 'index.html'), 'utf-8');
 
-function upload (doc, revs) {
+/**
+ * CouchDB document
+ * @typedef {Object} Doc
+ * @param {String} Doc.id - CouchDB document ID
+ * @param {Object} Doc.doc - CouchDB document
+ * @param {String} Doc.doc.title - Post title
+ */
+
+/**
+ * Upload file to S3 bucket
+ *
+ * @param {Object} options
+ * @param {Doc} options.doc
+ * @param {Array} [options.revs] - fingerprinted asset filenames
+ * @param {Array} [options.template] - post markup with template literals
+ * @returns {Promise} - AWS SDK putObject response
+ */
+
+function upload (options) {
+  var { doc, revs, template } = options;
+
+  if (!template) template = defaultTemplate;
+
   var markup = template.replace(/\${title}/g, doc.doc.title).replace(/\${slug}/g, doc.id);
 
-  // use fingerprinted assets
-  revs.forEach(file => {
-    markup = markup.replace(file.filename, file.fingerprintedFilename);
-  });
+  if (revs) {
+    // use fingerprinted assets
+    revs.forEach(file => {
+      markup = markup.replace(file.filename, file.fingerprintedFilename);
+    });
+  }
 
   return s3
     .putObject({
@@ -25,6 +49,38 @@ function upload (doc, revs) {
       CacheControl: 'public, max-age=31536000, no-cache'
     }).promise();
 }
+
+function uploadTemplate (revs) {
+  var markup = defaultTemplate;
+
+  // use fingerprinted assets
+  revs.forEach(file => {
+    markup = markup.replace(file.filename, file.fingerprintedFilename);
+  });
+
+  return s3
+    .putObject({
+      Bucket: process.env.S3_BUCKET,
+      Key: 'postTemplate.html',
+      Body: markup,
+      ContentType: 'text/html'
+    }).promise();
+}
+
+/**
+ * File upload summary
+ * @typedef {Object} UploadSummary
+ * @param {String} UploadSummary.filename - original filename
+ * @param {String} UploadSummary.fingerprintedFilename - filename with fingerprint affix
+ * @param {String} UploadSummary.ETag - object value returned by S3
+ */
+
+/**
+ * Fingerprint and upload asset file to S3 bucket
+ *
+ * @param {String} filename - original filename
+ * @returns {Promise.<UploadSummary>}}
+ */
 
 function uploadAsset (filename) {
   var types = {
@@ -58,5 +114,6 @@ function uploadAsset (filename) {
 
 module.exports = {
   page: upload,
+  template: uploadTemplate,
   asset: uploadAsset
 };

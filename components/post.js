@@ -93,7 +93,7 @@ class Post {
   addPage () {
     const { slug, title } = this;
 
-    fetch('https://fxnaqc63j7.execute-api.us-east-1.amazonaws.com/production/posts', {
+    window.fetch('https://fxnaqc63j7.execute-api.us-east-1.amazonaws.com/production/posts', {
       method: 'POST',
       mode: 'cors',
       body: JSON.stringify({

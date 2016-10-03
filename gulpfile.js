@@ -53,7 +53,7 @@ gulp.task('bundleCSS', () => {
 gulp.task('bundleJS', () => {
   return browserify('browser/index.js')
     .transform('envify')
-    .transform('babelify', { presets: ['es2015'] })
+    .transform('babelify')
     .bundle()
     .pipe(source('bundle.js'))
     .pipe(gulp.dest('server/files'));
