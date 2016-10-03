@@ -3,7 +3,7 @@
   "author": "Eric Lanehart <eric@pushred.co> (http://pushred.co)",
   "scripts": {
     "dev": "env-cmd ./.env.json gulp $1",
-    "deploy": "npm run task upload",
+    "deploy": "npm run task deploy",
     "deploy:functions": "cd tasks && apex deploy --env-file ../.env.json",
     "task": "cd tasks && env-cmd ../.env.json node $1",
     "task:gulp": "env-cmd ./.env.json gulp $1",
